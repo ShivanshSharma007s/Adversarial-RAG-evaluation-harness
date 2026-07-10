@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adversarial Eval Dashboard</title>
+    <!-- Modern Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="background-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <main class="container">
+        <header>
+            <h1>Adversarial Eval <span>Dashboard</span></h1>
+            <p>Evaluating RAG systems with strict quote verification and adversarial perturbations.</p>
+        </header>
+
+        <section class="metrics-grid">
+            <div class="glass-card metric-card">
+                <h3>Accuracy</h3>
+                <div class="metric-value" id="accuracy-val">--%</div>
+            </div>
+            <div class="glass-card metric-card">
+                <h3>Hallucination Rate</h3>
+                <div class="metric-value" id="hallucination-val">--%</div>
+            </div>
+            <div class="glass-card metric-card">
+                <h3>Total Tests</h3>
+                <div class="metric-value" id="total-tests-val">--</div>
+            </div>
+        </section>
+
+        <section class="charts-grid">
+            <div class="glass-card chart-container">
+                <h3>Failure Distribution</h3>
+                <canvas id="failureChart"></canvas>
+            </div>
+            <div class="glass-card playground">
+                <h3>Live RAG Playground</h3>
+                <p class="subtitle">Test the strict quote-verification system interactively.</p>
+                <form id="chat-form">
+                    <div class="input-group">
+                        <label for="context-input">Context Document</label>
+                        <textarea id="context-input" rows="4" placeholder="Enter the context text here..."></textarea>
+                    </div>
+                    <div class="input-group">
+                        <label for="question-input">Question</label>
+                        <input type="text" id="question-input" placeholder="Ask a question about the context...">
+                    </div>
+                    <button type="submit" class="btn-primary">
+                        <span>Analyze</span>
+                        <div class="spinner" id="loading-spinner"></div>
+                    </button>
+                </form>
+
+                <div id="result-box" class="result-box hidden">
+                    <h4>Analysis Result</h4>
+                    <div class="result-item"><strong>Answer:</strong> <span id="res-answer"></span></div>
+                    <div class="result-item"><strong>Confidence Score:</strong> <span id="res-confidence"></span></div>
+                    <div class="result-item"><strong>Quotes Cited:</strong>
+                        <ul id="res-quotes"></ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>
